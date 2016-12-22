@@ -1,0 +1,17 @@
+<%@ page import ="java.sql.*" %>
+<%  
+	String MaHV = request.getParameter("MaHV");
+    String TenHV = request.getParameter("TenHV");
+    String NgaySinh = request.getParameter("NgaySinh");
+    String GioiTinh = request.getParameter("GioiTinh");
+    String DiaChi = request.getParameter("DiaChi");
+    String SDT = request.getParameter("SDT");
+    String Email = request.getParameter("Email");
+    Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+    Connection con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=CSDL_CNPM;","sa","123");
+    Statement st = con.createStatement();
+    int i = st.executeUpdate("update HocVien set TenHV= '"+TenHV+"',NgaySinh= '"+NgaySinh+"',GioiTinh= '"+GioiTinh+"',DiaChi= '"+DiaChi+"',SDT= "+SDT+",Email= '"+Email+"' where MaHV= '"+MaHV+"' ");
+    if (i > 0)
+    	response.sendRedirect("Quantrihocvien.jsp");
+    
+%>
